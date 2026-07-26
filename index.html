@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="gu">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Grow with Study</title>
+<title>Grow with Study | ગુજરાતી અભ્યાસ પ્લેટફોર્મ</title>
+
+<meta name="description" content="ધોરણ 8, 9 અને 10 માટે ગુજરાતી માધ્યમના ગણિત, વિજ્ઞાન, PDF Notes, Videos અને Quiz">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M68XPER49H"></script>
+
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -15,155 +19,209 @@ gtag('js', new Date());
 gtag('config','G-M68XPER49H');
 </script>
 
-
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial,sans-serif;
-background:#f5f7fb;
+padding:0;
+box-sizing:border-box;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#eef3fb;
+color:#222;
+}
+
+/* Header */
 
 header{
-background:#1565C0;
-color:white;
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+padding:45px 20px;
 text-align:center;
-padding:35px 15px;
+color:white;
 }
-
 
 header h1{
-font-size:38px;
-margin:0;
+font-size:42px;
 }
 
-
 header p{
+margin-top:10px;
 font-size:18px;
 }
 
+/* Notice */
 
-nav{
-background:#0D47A1;
+.notice{
+background:#FFF3CD;
+color:#856404;
 padding:12px;
-display:flex;
-justify-content:center;
-gap:10px;
-}
-
-
-nav a{
-background:#1565C0;
-color:white;
-text-decoration:none;
-padding:10px 20px;
-border-radius:10px;
+text-align:center;
 font-weight:bold;
 }
 
+/* Navigation */
 
+nav{
+position:sticky;
+top:0;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+background:#0D47A1;
+padding:12px;
+z-index:999;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+padding:10px 18px;
+margin:5px;
+border-radius:8px;
+transition:.3s;
+}
+
+nav a:hover{
+background:white;
+color:#1565C0;
+}
+
+/* Hero */
 
 .hero{
+max-width:1100px;
+margin:30px auto;
+padding:40px 25px;
+background:rgba(255,255,255,.55);
+backdrop-filter:blur(12px);
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
 text-align:center;
-padding:35px 20px;
 }
-
 
 .hero h2{
+font-size:34px;
 color:#1565C0;
-font-size:32px;
 }
-
 
 .hero p{
-font-size:20px;
+margin-top:15px;
+font-size:19px;
+line-height:1.6;
 }
 
-
-.btn{
+.hero a{
 display:inline-block;
+margin-top:25px;
+padding:14px 30px;
 background:#FF9800;
 color:white;
-padding:14px 35px;
-border-radius:10px;
 text-decoration:none;
+border-radius:10px;
 font-size:18px;
 }
 
+/* Search */
 
+.search{
+text-align:center;
+margin:30px;
+}
+
+.search input{
+width:90%;
+max-width:550px;
+padding:14px;
+border-radius:30px;
+border:2px solid #1565C0;
+font-size:16px;
+outline:none;
+}
+
+/* Container */
 
 .container{
-padding:20px;
-max-width:900px;
+max-width:1100px;
 margin:auto;
-}
-
-
-
-.card{
-background:white;
-padding:25px;
-margin:20px 0;
-border-radius:15px;
-box-shadow:0 4px 10px rgba(0,0,0,0.15);
-text-align:center;
-}
-
-
-
-.card h2{
-color:#1565C0;
-}
-
-
-
-.card p{
-font-size:18px;
-}
-
-
-
-.card a{
-display:inline-block;
-background:#1565C0;
-color:white;
-padding:12px 30px;
-border-radius:8px;
-text-decoration:none;
-}
-
-
-
-footer{
-background:#1565C0;
-color:white;
-text-align:center;
 padding:20px;
-margin-top:30px;
 }
 
+/* Responsive */
 
-footer a{
-color:white;
-text-decoration:none;
-}
-
-
-
-@media(max-width:600px){
+@media(max-width:700px){
 
 header h1{
 font-size:30px;
+}
+
+.hero h2{
+font-size:26px;
 }
 
 nav{
 flex-direction:column;
 }
 
-nav a{
-text-align:center;
 }
+  .card{
+
+background:white;
+
+padding:25px;
+
+margin:25px 0;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+transition:.35s;
+
+text-align:center;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.btn{
+
+display:inline-block;
+
+margin-top:15px;
+
+padding:12px 30px;
+
+background:#1565C0;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+}
+
+.btn:hover{
+
+background:#0D47A1;
+
+}
+
+ul{
+
+padding-left:20px;
 
 }
 
@@ -171,21 +229,25 @@ text-align:center;
 
 </head>
 
-
 <body>
-
 
 <header>
 
 <h1>📚 Grow with Study</h1>
 
-<p>ગુજરાતી માધ્યમના વિદ્યાર્થીઓ માટે મફત અભ્યાસ</p>
+<p>ગુજરાતી માધ્યમ માટે મફત અભ્યાસ પ્લેટફોર્મ</p>
 
 </header>
 
+<div class="notice">
 
+📢 નવા Chapter Notes અને PDF દર અઠવાડિયે ઉમેરવામાં આવે છે.
+
+</div>
 
 <nav>
+
+<a href="index.html">🏠 Home</a>
 
 <a href="std8.html">📘 Std 8</a>
 
@@ -193,116 +255,423 @@ text-align:center;
 
 <a href="std10.html">📕 Std 10</a>
 
+<a href="quiz.html">❓ Quiz</a>
+
+<a href="contact.html">📞 Contact</a>
+
 </nav>
 
+<section class="hero">
 
-
-<div class="hero">
-
-<h2>Welcome Students</h2>
+<h2>Welcome to Grow with Study</h2>
 
 <p>
-વિડિયો, નોટ્સ, PDF અને Quiz એક જ જગ્યાએ.
+
+ધોરણ 8, 9 અને 10 માટે ગુજરાતી માધ્યમના વિદ્યાર્થીઓને
+મફત Notes, PDF, Videos અને Quiz એક જ જગ્યાએ.
+
 </p>
 
+<a href="std9.html">
 
-<a class="btn" href="std9.html">
-Start Learning
+🚀 Start Learning
+
 </a>
 
+</section>
+
+<div class="search">
+
+<input
+type="text"
+id="searchInput"
+placeholder="🔍 વિષય અથવા Chapter શોધો...">
 
 </div>
 
-
-
-
 <div class="container">
 
+
+<!-- Std 8 -->
 
 <div class="card">
 
 <h2>📘 ધોરણ 8</h2>
 
-<p>ગણિત, વિજ્ઞાન અને સામાજિક વિજ્ઞાન</p>
+<p>
+ગણિત • વિજ્ઞાન • સામાજિક વિજ્ઞાન
+</p>
 
-<a href="std8.html">
+<a class="btn" href="std8.html">
+
 Open
+
 </a>
 
 </div>
 
 
+<!-- Std 9 -->
 
 <div class="card">
 
 <h2>📗 ધોરણ 9</h2>
 
-<p>ગણિત, વિજ્ઞાન અને સામાજિક વિજ્ઞાન</p>
+<p>
+ગણિત • વિજ્ઞાન • સામાજિક વિજ્ઞાન
+</p>
 
-<a href="std9.html">
+<a class="btn" href="std9.html">
+
 Open
+
 </a>
 
 </div>
 
 
-
+<!-- Std 10 -->
 
 <div class="card">
 
 <h2>📕 ધોરણ 10</h2>
 
-<p>ગણિત, વિજ્ઞાન અને સામાજિક વિજ્ઞાન</p>
+<p>
+ગણિત • વિજ્ઞાન • સામાજિક વિજ્ઞાન
+</p>
 
-<a href="std10.html">
+<a class="btn" href="std10.html">
+
 Open
+
 </a>
 
 </div>
 
 
+<!-- PDF -->
 
 <div class="card">
 
-<h2>❓ Quiz</h2>
+<h2>📥 PDF Notes</h2>
 
-<p>તમારું જ્ઞાન ચકાસો</p>
+<p>
 
-<a href="quiz.html">
-Start Quiz
+તમામ પ્રકરણોની PDF અહીં મળશે.
+
+</p>
+
+<a class="btn" href="pdf.html">
+
+Open PDF
+
 </a>
 
 </div>
 
 
+<!-- YouTube -->
+
+<div class="card">
+
+<h2>🎥 YouTube Channel</h2>
+
+<p>
+
+Grow with Study ના બધા વિડિયો જુઓ.
+
+</p>
+
+<a class="btn"
+href="https://youtube.com/@growwithstudy-b-01?si=xkitmaFyFCerc2Lx"
+target="_blank">
+
+Watch Videos
+
+</a>
+
+</div>
+
+
+<!-- Latest Updates -->
+
+<div class="card">
+
+<h2>📢 Latest Updates</h2>
+
+<ul style="text-align:left;line-height:2;">
+
+<li>✅ ધોરણ 9 ગણિત - પ્રકરણ 2 Notes ઉપલબ્ધ</li>
+
+<li>📥 PDF ટૂંક સમયમાં ઉમેરાશે</li>
+
+<li>🎥 નવા વિડિયો દર અઠવાડિયે અપલોડ થાય છે</li>
+
+<li>⭐ Quiz વિભાગ જલ્દી આવશે</li>
+
+</ul>
+
 </div>
 
 
 
+  </div>
+
 <footer>
 
+<h2>📚 Grow with Study</h2>
 
-<p>
-© 2026 Grow with Study. All Rights Reserved.
-</p>
+<p>ગુજરાતી માધ્યમના વિદ્યાર્થીઓ માટે મફત અભ્યાસ</p>
 
+<div class="footer-links">
 
-<p>
+<a href="about.html">About Us</a>
 
-<a href="about.html">About Us</a> |
+|
 
-<a href="privacy.html">Privacy Policy</a> |
+<a href="privacy.html">Privacy Policy</a>
 
-<a href="terms.html">Terms</a> |
+|
+
+<a href="terms.html">Terms</a>
+
+|
 
 <a href="contact.html">Contact</a>
 
+</div>
+
+<div class="social">
+
+<a href="https://youtube.com/@growwithstudy-b-01" target="_blank">
+🎥 Subscribe on YouTube
+</a>
+
+</div>
+
+<p style="margin-top:20px;">
+© 2026 Grow with Study. All Rights Reserved.
 </p>
 
-
 </footer>
+<!-- Back To Top Button -->
+<button id="topBtn">⬆</button>
+
+<!-- Dark Mode Button -->
+<button id="darkBtn">🌙</button>
+
+<style>
+
+/* Dark Mode */
+
+.dark{
+background:#121212;
+color:white;
+}
+
+.dark .card{
+background:#1f1f1f;
+color:white;
+}
+
+.dark header{
+background:linear-gradient(135deg,#222,#000);
+}
+
+.dark nav{
+background:#000;
+}
+
+.dark .hero{
+background:#222;
+color:white;
+}
+
+/* Floating Buttons */
+
+#topBtn,#darkBtn{
+
+position:fixed;
+
+right:20px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+font-size:22px;
+
+cursor:pointer;
+
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+
+}
+
+#topBtn{
+
+bottom:20px;
+
+display:none;
+
+background:#FF9800;
+
+color:white;
+
+}
+
+#darkBtn{
+
+bottom:90px;
+
+background:#1565C0;
+
+color:white;
+
+}
+
+/* Progress Bar */
+
+#progressBar{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+height:5px;
+
+width:0%;
+
+background:#FF9800;
+
+z-index:9999;
+
+}
+  footer{
+background:#1565C0;
+color:white;
+text-align:center;
+padding:30px 20px;
+margin-top:40px;
+}
+
+footer h2{
+margin-bottom:10px;
+}
+
+footer p{
+margin:10px 0;
+}
+
+.footer-links{
+margin:20px 0;
+}
+
+.footer-links a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+font-size:16px;
+font-weight:bold;
+}
+
+.footer-links a:hover{
+color:#FFD54F;
+}
+
+.social a{
+display:inline-block;
+background:#FF0000;
+color:white;
+padding:12px 20px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+margin-top:15px;
+}
+
+.social a:hover{
+background:#cc0000;
+}
+
+</style>
+
+<div id="progressBar"></div>
+
+<script>
+
+// Dark Mode
+
+document.getElementById("darkBtn").onclick=function(){
+
+document.body.classList.toggle("dark");
+
+};
+
+// Search
+
+const search=document.getElementById("searchInput");
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.style.display=
+
+card.innerText.toLowerCase().includes(value)
+
+? "block":"none";
+
+});
+
+});
+
+// Back To Top
+
+const topBtn=document.getElementById("topBtn");
+
+window.onscroll=function(){
+
+if(document.documentElement.scrollTop>300){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+let winScroll=document.documentElement.scrollTop;
+
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+
+document.getElementById("progressBar").style.width=(winScroll/height)*100+"%";
+
+};
+
+topBtn.onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
 
 
+
+</script>
 </body>
 
 </html>
