@@ -155,7 +155,66 @@ text-align:center;
 <input type="radio" name="q20" value="0"> થેલ્સ પ્રમેય<br>
 <input type="radio" name="q20" value="0"> યુક્લિડ પ્રમેય
 </div>
-<a href="quiz.html">
+
+<br>
+
+<button type="button" onclick="checkQuiz()">
+Submit Quiz
+</button>
+
+<button type="reset">
+Reset Quiz
+</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function checkQuiz(){
+
+let score = 0;
+
+let answers = document.querySelectorAll("input[type=radio]:checked");
+
+answers.forEach(function(ans){
+score += Number(ans.value);
+});
+
+let percent = score * 10;
+
+let grade = "";
+
+if(score==10){
+grade="🏆 Excellent";
+}
+else if(score>=8){
+grade="🌟 Very Good";
+}
+else if(score>=6){
+grade="👍 Good";
+}
+else if(score>=4){
+grade="🙂 Practice More";
+}
+else{
+grade="📚 Revise Chapter Again";
+}
+
+document.getElementById("result").innerHTML=
+"<h2>તમારો સ્કોર : "+score+"/10</h2>"+
+"<h3>ટકા : "+percent+"%</h3>"+
+"<h3>"+grade+"</h3>";
+
+}
+
+</script>
+
+</body>
+  <a href="quiz.html">
 <button style="margin-top:20px;">
 ⬅️ Previous Quiz
 </button>
