@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ધોરણ 9 ગણિત Quiz - પ્રકરણ 2</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fb;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+color:#1565C0;
+}
+
+.question{
+background:#f9f9f9;
+padding:15px;
+margin:20px 0;
+border-radius:10px;
+border-left:5px solid #1565C0;
+}
+
+.question p{
+font-weight:bold;
+}
+
+button{
+background:#1565C0;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+#result{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📘 ધોરણ 9 - ગણિત</h1>
+
+<h2 style="text-align:center;">
+પ્રકરણ 2 - બહુપદી Quiz
+</h2>
+
+<form id="quizForm">
+
+<div class="question">
+<p>1. ચલ એટલે શું?</p>
+
+<input type="radio" name="q1" value="0"> અચલ<br>
+<input type="radio" name="q1" value="1"> જેનું મૂલ્ય બદલાય શકે<br>
+<input type="radio" name="q1" value="0"> પૂર્ણાંક<br>
+<input type="radio" name="q1" value="0"> બહુપદી
+
+</div>
+
+<div class="question">
+<p>2. 5x માં સહગુણક કયો છે?</p>
+
+<input type="radio" name="q2" value="1"> 5<br>
+<input type="radio" name="q2" value="0"> x<br>
+<input type="radio" name="q2" value="0"> 0<br>
+<input type="radio" name="q2" value="0"> 2
+
+</div>
+
+<div class="question">
+<p>3. x² − 5x + 6 ના અવયવ કયા છે?</p>
+
+<input type="radio" name="q3" value="1">(x−2)(x−3)<br>
+<input type="radio" name="q3" value="0">(x+2)(x+3)<br>
+<input type="radio" name="q3" value="0">(x−1)(x−6)<br>
+<input type="radio" name="q3" value="0">કોઈ નહીં
+
+</div>
+
+<div class="question">
+<p>4. બહુપદી x² − 5x + 6 નું એક શૂન્ય કયું છે?</p>
+
+<input type="radio" name="q4" value="1">2<br>
+<input type="radio" name="q4" value="0">5<br>
+<input type="radio" name="q4" value="0">6<br>
+<input type="radio" name="q4" value="0">1
+
+</div>
+
+<div class="question">
+<p>5. x − 1 જો બહુપદીનો અવયવ હોય તો?</p>
+
+<input type="radio" name="q5" value="1">p(1)=0<br>
+<input type="radio" name="q5" value="0">p(0)=0<br>
+<input type="radio" name="q5" value="0">p(2)=0<br>
+<input type="radio" name="q5" value="0">p(-1)=0
+
+</div>
+<div class="question">
+<p>6. એકપદીમાં કેટલા પદ હોય છે?</p>
+
+<input type="radio" name="q6" value="1">1<br>
+<input type="radio" name="q6" value="0">2<br>
+<input type="radio" name="q6" value="0">3<br>
+<input type="radio" name="q6" value="0">4
+
+</div>
+
+<div class="question">
+<p>7. દ્વિપદીમાં કેટલા પદ હોય છે?</p>
+
+<input type="radio" name="q7" value="0">1<br>
+<input type="radio" name="q7" value="1">2<br>
+<input type="radio" name="q7" value="0">3<br>
+<input type="radio" name="q7" value="0">4
+
+</div>
+
+<div class="question">
+<p>8. ત્રિપદીમાં કેટલા પદ હોય છે?</p>
+
+<input type="radio" name="q8" value="0">2<br>
+<input type="radio" name="q8" value="1">3<br>
+<input type="radio" name="q8" value="0">4<br>
+<input type="radio" name="q8" value="0">5
+
+</div>
+
+<div class="question">
+<p>9. નીચેમાંથી કઈ બહુપદી છે?</p>
+
+<input type="radio" name="q9" value="1">3x² + 2x − 5<br>
+<input type="radio" name="q9" value="0">2/x + 1<br>
+<input type="radio" name="q9" value="0">√x + 2<br>
+<input type="radio" name="q9" value="0">1/x²
+
+</div>
+
+<div class="question">
+<p>10. y² − 5y + 6 ના અવયવ કયા છે?</p>
+
+<input type="radio" name="q10" value="1">(y−2)(y−3)<br>
+<input type="radio" name="q10" value="0">(y+2)(y+3)<br>
+<input type="radio" name="q10" value="0">(y−1)(y−6)<br>
+<input type="radio" name="q10" value="0">કોઈ નહીં
+
+</div>
+
+<br>
+
+<button type="button" onclick="checkQuiz()">
+Submit Quiz
+</button>
+
+<button type="reset">
+Reset Quiz
+</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function checkQuiz(){
+
+let score = 0;
+
+let answers = document.querySelectorAll("input[type=radio]:checked");
+
+answers.forEach(function(ans){
+score += Number(ans.value);
+});
+
+let percent = score * 10;
+
+let grade = "";
+
+if(score==10){
+grade="🏆 Excellent";
+}
+else if(score>=8){
+grade="🌟 Very Good";
+}
+else if(score>=6){
+grade="👍 Good";
+}
+else if(score>=4){
+grade="🙂 Practice More";
+}
+else{
+grade="📚 Revise Chapter Again";
+}
+
+document.getElementById("result").innerHTML=
+"<h2>તમારો સ્કોર : "+score+"/10</h2>"+
+"<h3>ટકા : "+percent+"%</h3>"+
+"<h3>"+grade+"</h3>";
+
+}
+
+</script>
+
+</body>
+</html>
+<a href="quiz2.html">
+<button style="margin-top:20px;">
+➡️ Next Quiz (11-20)
+</button>
+</a>
