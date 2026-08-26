@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="gu">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ધોરણ 9 ગણિત - પ્રકરણ 3 યામ ભૂમિતિ</title>
+
+<style>
+
+body{
+    font-family:"Noto Sans Gujarati", Arial, sans-serif;
+    line-height:1.8;
+    margin:20px;
+    color:#222;
+    background:#f5f5f5;
+}
+
+h1{
+    text-align:center;
+    color:#1565C0;
+}
+
+h2{
+    color:#1565C0;
+    border-bottom:2px solid #1565C0;
+    padding-bottom:5px;
+}
+
+h3{
+    color:#E65100;
+}
+
+.box{
+    background:white;
+    border:1px solid #1565C0;
+    padding:18px;
+    border-radius:12px;
+    margin:20px 0;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.example{
+    background:#fff8e1;
+    padding:15px;
+    border-left:5px solid #FF9800;
+    border-radius:8px;
+    margin:15px 0;
+}
+
+.important{
+    background:#fff3e0;
+    border:2px solid #FF9800;
+    border-radius:10px;
+    padding:15px;
+    margin:20px 0;
+}
+
+.graph{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:20px auto;
+    background:white;
+    border:2px solid #1565C0;
+    border-radius:10px;
+}
+
+.point{
+    background:#f5f9ff;
+    border-left:4px solid #1565C0;
+    padding:12px;
+    margin:12px 0;
+    border-radius:6px;
+}
+
+.answer{
+    background:#e8f5e9;
+    border-left:5px solid #2E7D32;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+footer{
+    text-align:center;
+    margin-top:40px;
+    padding:20px;
+    color:#555;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>📗 ધોરણ - 9 ગણિત</h1>
+<h1>પ્રકરણ - 3 : યામ ભૂમિતિ</h1>
+
+
+<!-- ==================================================
+1. યામ સમતલ
+================================================== -->
+
+<div class="box">
+
+<h2>1) યામ-સમતલ</h2>
+
+<p>
+• સમતલમાં એક <b>સમક્ષિતિજ રેખા (આડી રેખા)</b> અને બીજી
+<b>શિરોલંબ રેખા (ઊભી રેખા)</b> એમ બે પરસ્પર લંબ રેખાઓ દોરવામાં આવે,
+તો તે સમતલને <b>યામ-સમતલ</b> કહે છે.
+</p>
+
+<canvas id="coordinatePlane"
+        width="600"
+        height="600"
+        class="graph">
+</canvas>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   BASIC COORDINATE PLANE
+================================================== */
+
+const canvas = document.getElementById("coordinatePlane");
+const ctx = canvas.getContext("2d");
+
+const W = canvas.width;
+const H = canvas.height;
+
+const ox = W / 2;
+const oy = H / 2;
+const unit = 40;
+
+/* Background */
+ctx.fillStyle = "white";
+ctx.fillRect(0,0,W,H);
+
+/* Grid */
+ctx.strokeStyle = "#e0e0e0";
+ctx.lineWidth = 1;
+
+for(let x=ox; x<=W; x+=unit){
+    ctx.beginPath();
+    ctx.moveTo(x,0);
+    ctx.lineTo(x,H);
+    ctx.stroke();
+}
+
+for(let x=ox-unit; x>=0; x-=unit){
+    ctx.beginPath();
+    ctx.moveTo(x,0);
+    ctx.lineTo(x,H);
+    ctx.stroke();
+}
+
+for(let y=oy; y<=H; y+=unit){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(W,y);
+    ctx.stroke();
+}
+
+for(let y=oy-unit; y>=0; y-=unit){
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(W,y);
+    ctx.stroke();
+}
+
+/* X axis */
+ctx.strokeStyle="#000";
+ctx.lineWidth=3;
+
+ctx.beginPath();
+ctx.moveTo(25,oy);
+ctx.lineTo(W-25,oy);
+ctx.stroke();
+
+/* X arrow */
+ctx.beginPath();
+ctx.moveTo(W-25,oy);
+ctx.lineTo(W-42,oy-9);
+ctx.lineTo(W-42,oy+9);
+ctx.closePath();
+ctx.fill();
+
+/* Y axis */
+ctx.beginPath();
+ctx.moveTo(ox,H-25);
+ctx.lineTo(ox,25);
+ctx.stroke();
+
+/* Y arrow */
+ctx.beginPath();
+ctx.moveTo(ox,25);
+ctx.lineTo(ox-9,42);
+ctx.lineTo(ox+9,42);
+ctx.closePath();
+ctx.fill();
+
+/* Axis names */
+ctx.font="bold 22px Arial";
+ctx.fillStyle="#1565C0";
+
+ctx.fillText("X",W-30,oy-15);
+ctx.fillText("Y",ox+12,25);
+
+/* Numbers */
+ctx.font="14px Arial";
+ctx.fillStyle="#222";
+
+for(let i=-7;i<=7;i++){
+
+    if(i!==0){
+
+        let x=ox+i*unit;
+
+        ctx.fillText(
+            i,
+            x-5,
+            oy+20
+        );
+
+        let y=oy-i*unit;
+
+        ctx.fillText(
+            i,
+            ox+10,
+            y+5
+        );
+    }
+}
+
+/* Origin */
+ctx.fillStyle="#d32f2f";
+
+ctx.beginPath();
+ctx.arc(ox,oy,6,0,Math.PI*2);
+ctx.fill();
+
+ctx.fillStyle="#222";
+ctx.font="bold 16px Arial";
+
+ctx.fillText(
+    "O (0,0)",
+    ox+10,
+    oy+25
+);
+
+/* Quadrants */
+
+ctx.font="bold 22px Arial";
+ctx.fillStyle="#1565C0";
+
+ctx.fillText("ચરણ I",ox+70,oy-70);
+ctx.fillText("ચરણ II",ox-100,oy-70);
+ctx.fillText("ચરણ III",ox-110,oy+100);
+ctx.fillText("ચરણ IV",ox+70,oy+100);
+
+</script>
+
+
+<!-- ==================================================
+2. યામાક્ષો
+================================================== -->
+
+<div class="box">
+
+<h2>2) યામાક્ષો અને ચરણો</h2>
+
+<p>
+• સમક્ષિતિજ રેખાને <b>X-અક્ષ</b> અને શિરોલંબ રેખાને
+<b>Y-અક્ષ</b> કહેવાય છે.
+</p>
+
+<p>
+• X-અક્ષ અને Y-અક્ષને સંયુક્ત રીતે <b>યામાક્ષો</b> કહેવાય છે.
+</p>
+
+<p>
+• યામ-સમતલને <b>કાર્તેઝિય સમતલ</b> અથવા <b>xy-સમતલ</b>
+પણ કહેવામાં આવે છે.
+</p>
+
+<p>
+• X-અક્ષ અને Y-અક્ષ સમતલને <b>ચાર વિભાગોમાં</b> વહેંચે છે.
+દરેક વિભાગને <b>ચરણ અથવા પાદ</b> કહેવામાં આવે છે.
+</p>
+
+<div class="important">
+
+<h3>ચરણોના ચિહ્નો</h3>
+
+<p><b>પ્રથમ ચરણ:</b> X + , Y +</p>
+<p><b>બીજું ચરણ:</b> X − , Y +</p>
+<p><b>ત્રીજું ચરણ:</b> X − , Y −</p>
+<p><b>ચોથું ચરણ:</b> X + , Y −</p>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+3. બિંદુના યામ
+================================================== -->
+
+<div class="box">
+
+<h2>3) બિંદુના યામ</h2>
+
+<div class="point">
+
+<p>
+• બિંદુના યામ લખતી વખતે પહેલા <b>X-યામ</b> અને પછી
+<b>Y-યામ</b> લખવામાં આવે છે.
+</p>
+
+<p style="text-align:center;font-size:22px;font-weight:bold;">
+(X , Y)
+</p>
+
+</div>
+
+<div class="point">
+
+<p>
+• X-અક્ષ અને Y-અક્ષના છેદબિંદુને <b>ઉગમબિંદુ</b> કહે છે.
+</p>
+
+<p>
+ઉગમબિંદુના યામ = <b>(0, 0)</b>
+</p>
+
+</div>
+
+<div class="point">
+
+<p>
+• બિંદુના <b>X-યામને ભૂજ</b> અને
+<b>Y-યામને કોટિ</b> કહે છે.
+</p>
+
+</div>
+
+<div class="example">
+
+<h3>📌 ઉદાહરણ : (3, -4)</h3>
+
+<p>
+<b>3</b> → ભૂજ અથવા X-યામ
+</p>
+
+<p>
+<b>-4</b> → કોટિ અથવા Y-યામ
+</p>
+
+<p style="text-align:center;font-size:22px;font-weight:bold;">
+(X , Y)
+<br>
+↓ &nbsp;&nbsp;&nbsp; ↓
+<br>
+ભૂજ &nbsp;&nbsp; કોટિ
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+બિંદુઓનું નિરૂપણ
+================================================== -->
+
+<div class="box">
+
+<h2>બિંદુઓનું નિરૂપણ</h2>
+
+<p>
+નીચેના બિંદુઓને યામ-સમતલમાં દર્શાવો:
+</p>
+
+<p style="text-align:center;font-size:20px;font-weight:bold;">
+A(3,4), B(5,2), C(-3,4), D(-5,2)
+<br>
+E(-3,-4), F(-5,-2), G(3,-4), H(5,-2)
+<br>
+I(4,0), J(-4,0), K(0,4), L(0,-4)
+</p>
+
+<svg viewBox="0 0 700 700"
+     class="graph">
+
+<!-- GRID -->
+
+<g stroke="#dddddd" stroke-width="1">
+
+<script>
+</script>
+
+<line x1="50" y1="50" x2="50" y2="650"/>
+<line x1="100" y1="50" x2="100" y2="650"/>
+<line x1="150" y1="50" x2="150" y2="650"/>
+<line x1="200" y1="50" x2="200" y2="650"/>
+<line x1="250" y1="50" x2="250" y2="650"/>
+<line x1="300" y1="50" x2="300" y2="650"/>
+<line x1="350" y1="50" x2="350" y2="650"/>
+<line x1="400" y1="50" x2="400" y2="650"/>
+<line x1="450" y1="50" x2="450" y2="650"/>
+<line x1="500" y1="50" x2="500" y2="650"/>
+<line x1="550" y1="50" x2="550" y2="650"/>
+<line x1="600" y1="50" x2="600" y2="650"/>
+<line x1="650" y1="50" x2="650" y2="650"/>
+
+<line x1="50" y1="50" x2="650" y2="50"/>
+<line x1="50" y1="100" x2="650" y2="100"/>
+<line x1="50" y1="150" x2="650" y2="150"/>
+<line x1="50" y1="200" x2="650" y2="200"/>
+<line x1="50" y1="250" x2="650" y2="250"/>
+<line x1="50" y1="300" x2="650" y2="300"/>
+<line x1="50" y1="350" x2="650" y2="350"/>
+<line x1="50" y1="400" x2="650" y2="400"/>
+<line x1="50" y1="450" x2="650" y2="450"/>
+<line x1="50" y1="500" x2="650" y2="500"/>
+<line x1="50" y1="550" x2="650" y2="550"/>
+<line x1="50" y1="600" x2="650" y2="600"/>
+<line x1="50" y1="650" x2="650" y2="650"/>
+
+</g>
+
+<!-- AXES -->
+
+<line x1="30" y1="350"
+      x2="670" y2="350"
+      stroke="black"
+      stroke-width="4"/>
+
+<polygon points="670,350 650,340 650,360"
+         fill="black"/>
+
+<line x1="350" y1="670"
+      x2="350" y2="30"
+      stroke="black"
+      stroke-width="4"/>
+
+<polygon points="350,30 340,50 360,50"
+         fill="black"/>
+
+<!-- AXIS NAME -->
+
+<text x="665" y="335"
+      font-size="24"
+      font-weight="bold"
+      fill="#1565C0">X</text>
+
+<text x="365" y="35"
+      font-size="24"
+      font-weight="bold"
+      fill="#1565C0">Y</text>
+
+<!-- NUMBERS -->
+
+<g font-size="15"
+   fill="black"
+   text-anchor="middle">
+
+<text x="100" y="370">-5</text>
+<text x="150" y="370">-4</text>
+<text x="200" y="370">-3</text>
+<text x="250" y="370">-2</text>
+<text x="300" y="370">-1</text>
+
+<text x="400" y="370">1</text>
+<text x="450" y="370">2</text>
+<text x="500" y="370">3</text>
+<text x="550" y="370">4</text>
+<text x="600" y="370">5</text>
+
+</g>
+
+<g font-size="15" fill="black">
+
+<text x="360" y="105">5</text>
+<text x="360" y="155">4</text>
+<text x="360" y="205">3</text>
+<text x="360" y="255">2</text>
+<text x="360" y="305">1</text>
+
+<text x="360" y="405">-1</text>
+<text x="360" y="455">-2</text>
+<text x="360" y="505">-3</text>
+<text x="360" y="555">-4</text>
+<text x="360" y="605">-5</text>
+
+</g>
+
+<!-- ORIGIN -->
+
+<circle cx="350" cy="350" r="6" fill="#1565C0"/>
+
+<text x="360" y="375"
+      font-size="16"
+      font-weight="bold">
+O(0,0)
+</text>
+
+<!-- QUADRANTS -->
+
+<text x="470" y="250"
+      font-size="25"
+      font-weight="bold"
+      fill="#777">I</text>
+
+<text x="210" y="250"
+      font-size="25"
+      font-weight="bold"
+      fill="#777">II</text>
+
+<text x="190" y="470"
+      font-size="25"
+      font-weight="bold"
+      fill="#777">III</text>
+
+<text x="470" y="470"
+      font-size="25"
+      font-weight="bold"
+      fill="#777">IV</text>
+
+<!-- POINTS -->
+
+<circle cx="500" cy="150" r="7" fill="red"/>
+<text x="510" y="140" font-size="16" font-weight="bold">
+A(3,4)
+</text>
+
+<circle cx="600" cy="250" r="7" fill="red"/>
+<text x="610" y="240" font-size="16" font-weight="bold">
+B(5,2)
+</text>
+
+<circle cx="200" cy="150" r="7" fill="red"/>
+<text x="90" y="140" font-size="16" font-weight="bold">
+C(-3,4)
+</text>
+
+<circle cx="100" cy="250" r="7" fill="red"/>
+<text x="40" y="240" font-size="16" font-weight="bold">
+D(-5,2)
+</text>
+
+<circle cx="200" cy="550" r="7" fill="red"/>
+<text x="70" y="570" font-size="16" font-weight="bold">
+E(-3,-4)
+</text>
+
+<circle cx="100" cy="450" r="7" fill="red"/>
+<text x="35" y="470" font-size="16" font-weight="bold">
+F(-5,-2)
+</text>
+
+<circle cx="500" cy="550" r="7" fill="red"/>
+<text x="510" y="570" font-size="16" font-weight="bold">
+G(3,-4)
+</text>
+
+<circle cx="600" cy="450" r="7" fill="red"/>
+<text x="610" y="470" font-size="16" font-weight="bold">
+H(5,-2)
+</text>
+
+<circle cx="550" cy="350" r="8" fill="#FF9800"/>
+<text x="560" y="335" font-size="16" font-weight="bold">
+I(4,0)
+</text>
+
+<circle cx="150" cy="350" r="8" fill="#FF9800"/>
+<text x="60" y="335" font-size="16" font-weight="bold">
+J(-4,0)
+</text>
+
+<circle cx="350" cy="150" r="8" fill="#FF9800"/>
+<text x="365" y="140" font-size="16" font-weight="bold">
+K(0,4)
+</text>
+
+<circle cx="350" cy="550" r="8" fill="#FF9800"/>
+<text x="365" y="575" font-size="16" font-weight="bold">
+L(0,-4)
+</text>
+
+</svg>
+
+</div>
+
+
+<!-- ==================================================
+IMPORTANT
+================================================== -->
+
+<div class="important">
+
+<h3>⭐ ખૂબ મહત્વનું</h3>
+
+<p>
+• <b>X-અક્ષ</b> પર આવેલા દરેક બિંદુ માટે <b>Y-યામ = 0</b>.
+</p>
+
+<p>
+• <b>Y-અક્ષ</b> પર આવેલા દરેક બિંદુ માટે <b>X-યામ = 0</b>.
+</p>
+
+<div style="background:white;padding:12px;text-align:center;font-weight:bold;border-radius:8px;">
+X-અક્ષ → (x, 0)
+<br><br>
+Y-અક્ષ → (0, y)
+</div>
+
+</div>
+
+
+<!-- ==================================================
+SWADHYAY 3.1 - Q1
+================================================== -->
+
+<div class="box">
+
+<h2>સ્વાધ્યાય 3.1 — પ્રશ્ન 1</h2>
+
+<p>
+બીજી કોઈ વ્યક્તિને તમારા અભ્યાસના ટેબલ પરના
+ટેબલ લેમ્પનું સ્થાન કેવી રીતે વર્ણવશો?
+</p>
+
+<div class="example">
+
+<p>
+ટેબલ લેમ્પનું સ્થાન <b>(3,4)</b> તરીકે દર્શાવી શકાય છે.
+</p>
+
+<p>
+અહીં <b>X-યામ = 3</b> અને <b>Y-યામ = 4</b>.
+</p>
+
+</div>
+
+<canvas id="q1Graph"
+        width="600"
+        height="500"
+        class="graph">
+</canvas>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   Q1 GRAPH
+================================================== */
+
+const c1=document.getElementById("q1Graph");
+const g1=c1.getContext("2d");
+
+const ox1=100;
+const oy1=420;
+const unit1=65;
+
+g1.fillStyle="white";
+g1.fillRect(0,0,600,500);
+
+/* Grid */
+
+g1.strokeStyle="#dcdcdc";
+g1.lineWidth=1;
+
+for(let i=0;i<=6;i++){
+
+    let x=ox1+i*unit1;
+
+    g1.beginPath();
+    g1.moveTo(x,30);
+    g1.lineTo(x,oy1);
+    g1.stroke();
+
+    let y=oy1-i*unit1;
+
+    g1.beginPath();
+    g1.moveTo(ox1,y);
+    g1.lineTo(ox1+6*unit1,y);
+    g1.stroke();
+}
+
+/* Axes */
+
+g1.strokeStyle="#000";
+g1.lineWidth=3;
+
+g1.beginPath();
+g1.moveTo(50,oy1);
+g1.lineTo(550,oy1);
+g1.stroke();
+
+g1.beginPath();
+g1.moveTo(ox1,450);
+g1.lineTo(ox1,30);
+g1.stroke();
+
+/* Arrows */
+
+g1.beginPath();
+g1.moveTo(550,oy1);
+g1.lineTo(535,oy1-8);
+g1.lineTo(535,oy1+8);
+g1.closePath();
+g1.fill();
+
+g1.beginPath();
+g1.moveTo(ox1,30);
+g1.lineTo(ox1-8,45);
+g1.lineTo(ox1+8,45);
+g1.closePath();
+g1.fill();
+
+/* Numbers */
+
+g1.font="16px Arial";
+g1.fillStyle="#222";
+
+for(let i=1;i<=6;i++){
+
+    g1.fillText(
+        i,
+        ox1+i*unit1-5,
+        oy1+25
+    );
+
+    g1.fillText(
+        i,
+        ox1-25,
+        oy1-i*unit1+5
+    );
+}
+
+/* Axis */
+
+g1.font="bold 20px Arial";
+g1.fillStyle="#1565C0";
+
+g1.fillText("X-અક્ષ",490,oy1-15);
+g1.fillText("Y-અક્ષ",ox1+10,35);
+
+/* Point */
+
+const px1=ox1+3*unit1;
+const py1=oy1-4*unit1;
+
+/* Projection */
+
+g1.setLineDash([6,5]);
+g1.strokeStyle="#FF9800";
+g1.lineWidth=2;
+
+g1.beginPath();
+g1.moveTo(px1,py1);
+g1.lineTo(px1,oy1);
+g1.stroke();
+
+g1.beginPath();
+g1.moveTo(px1,py1);
+g1.lineTo(ox1,py1);
+g1.stroke();
+
+g1.setLineDash([]);
+
+/* Point */
+
+g1.fillStyle="#D32F2F";
+
+g1.beginPath();
+g1.arc(px1,py1,8,0,Math.PI*2);
+g1.fill();
+
+/* Label */
+
+g1.font="bold 18px Arial";
+g1.fillStyle="#D32F2F";
+
+g1.fillText("(3, 4)",px1+12,py1-10);
+
+</script>
+
+
+<!-- ==================================================
+SWADHYAY 3.1 - Q2
+================================================== -->
+
+<div class="box">
+
+<h2>સ્વાધ્યાય 3.1 — પ્રશ્ન 2</h2>
+
+<p>
+એક શહેરના બે મુખ્ય રસ્તાઓ શહેરના કેન્દ્ર આગળ એકબીજાને છેદે છે.
+એક રસ્તો ઉત્તર-દક્ષિણ અને બીજો પૂર્વ-પશ્ચિમ દિશામાં છે.
+બાકીની શેરીઓ આ રસ્તાઓને સમાંતર છે.
+</p>
+
+<p>
+માપ: <b>1 સેમી = 200 મીટર</b>
+</p>
+
+<p>
+(i) કેટલી છેદતી શેરીઓનું નામાભિધાન <b>(4,3)</b> તરીકે થઈ શકે?
+</p>
+
+<p>
+(ii) કેટલી છેદતી શેરીઓનું નામાભિધાન <b>(3,4)</b> તરીકે થઈ શકે?
+</p>
+
+<canvas id="q2Graph"
+        width="700"
+        height="650"
+        class="graph">
+</canvas>
+
+<div class="answer">
+
+<p>
+<b>સમજૂતી:</b>
+</p>
+
+<p>
+(4,3) માં પ્રથમ સંખ્યા X-દિશા અને બીજી સંખ્યા Y-દિશા દર્શાવે છે.
+</p>
+
+<p>
+(3,4) માં પ્રથમ સંખ્યા X-દિશા અને બીજી સંખ્યા Y-દિશા દર્શાવે છે.
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   Q2 CITY MAP
+================================================== */
+
+const c2=document.getElementById("q2Graph");
+const g2=c2.getContext("2d");
+
+const ox2=100;
+const oy2=550;
+const unit2=70;
+
+g2.fillStyle="white";
+g2.fillRect(0,0,700,650);
+
+/* Streets */
+
+g2.strokeStyle="#1565C0";
+g2.lineWidth=3;
+
+for(let i=1;i<=5;i++){
+
+    let x=ox2+i*unit2;
+
+    g2.beginPath();
+    g2.moveTo(x,80);
+    g2.lineTo(x,oy2);
+    g2.stroke();
+}
+
+g2.strokeStyle="#2E7D32";
+
+for(let i=1;i<=5;i++){
+
+    let y=oy2-i*unit2;
+
+    g2.beginPath();
+    g2.moveTo(ox2,y);
+    g2.lineTo(ox2+5*unit2,y);
+    g2.stroke();
+}
+
+/* Main axes */
+
+g2.strokeStyle="#000";
+g2.lineWidth=4;
+
+g2.beginPath();
+g2.moveTo(50,oy2);
+g2.lineTo(650,oy2);
+g2.stroke();
+
+g2.beginPath();
+g2.moveTo(ox2,600);
+g2.lineTo(ox2,40);
+g2.stroke();
+
+/* Arrows */
+
+g2.beginPath();
+g2.moveTo(650,oy2);
+g2.lineTo(635,oy2-8);
+g2.lineTo(635,oy2+8);
+g2.closePath();
+g2.fill();
+
+g2.beginPath();
+g2.moveTo(ox2,40);
+g2.lineTo(ox2-8,55);
+g2.lineTo(ox2+8,55);
+g2.closePath();
+g2.fill();
+
+/* Numbers */
+
+g2.font="16px Arial";
+g2.fillStyle="#222";
+
+for(let i=1;i<=5;i++){
+
+    g2.fillText(
+        i,
+        ox2+i*unit2-5,
+        oy2+25
+    );
+
+    g2.fillText(
+        i,
+        ox2-25,
+        oy2-i*unit2+5
+    );
+}
+
+/* Directions */
+
+g2.font="bold 18px Arial";
+g2.fillStyle="#1565C0";
+
+g2.fillText("પૂર્વ",590,oy2-15);
+g2.fillText("ઉત્તર",ox2+10,55);
+
+g2.fillStyle="#555";
+
+g2.fillText("પશ્ચિમ",50,oy2-15);
+g2.fillText("દક્ષિણ",ox2+10,625);
+
+/* Origin */
+
+g2.fillStyle="#000";
+
+g2.beginPath();
+g2.arc(ox2,oy2,5,0,Math.PI*2);
+g2.fill();
+
+g2.font="bold 16px Arial";
+g2.fillText("O",ox2-20,oy2+20);
+
+
+/* Function */
+
+function drawQ2Point(xVal,yVal,label){
+
+    const px=ox2+xVal*unit2;
+    const py=oy2-yVal*unit2;
+
+    g2.setLineDash([6,5]);
+    g2.strokeStyle="#FF9800";
+    g2.lineWidth=2;
+
+    g2.beginPath();
+    g2.moveTo(px,py);
+    g2.lineTo(px,oy2);
+    g2.stroke();
+
+    g2.beginPath();
+    g2.moveTo(px,py);
+    g2.lineTo(ox2,py);
+    g2.stroke();
+
+    g2.setLineDash([]);
+
+    g2.fillStyle="#D32F2F";
+
+    g2.beginPath();
+    g2.arc(px,py,8,0,Math.PI*2);
+    g2.fill();
+
+    g2.font="bold 18px Arial";
+    g2.fillText(label,px+10,py-10);
+}
+
+/* Points */
+
+drawQ2Point(3,4,"(3,4)");
+drawQ2Point(4,3,"(4,3)");
+drawQ2Point(2,5,"(2,5)");
+
+g2.font="bold 16px Arial";
+g2.fillStyle="#555";
+
+g2.fillText(
+    "1 સે.મી. = 200 મીટર",
+    400,
+    70
+);
+
+</script>
+
+
+<!-- ==================================================
+ઉદાહરણ 1
+================================================== -->
+
+<div class="box">
+
+<h2>ઉદાહરણ 1 : આકૃતિ 3.11</h2>
+
+<p>
+આકૃતિમાં દર્શાવેલા બિંદુઓના યામ લખો.
+</p>
+
+<div class="example">
+
+<p>
+<b>(i)</b> B ના યામ = <b>(4, 3)</b>
+</p>
+
+<p>
+<b>(ii)</b> M ના યામ = <b>(-3, 4)</b>
+</p>
+
+<p>
+<b>(iii)</b> L ના યામ = <b>(-5, -4)</b>
+</p>
+
+<p>
+<b>(iv)</b> S ના યામ = <b>(3, -4)</b>
+</p>
+
+</div>
+
+<canvas id="example311Graph"
+        width="700"
+        height="600"
+        class="graph">
+</canvas>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   EXAMPLE 1 GRAPH
+================================================== */
+
+const ex=document.getElementById("example311Graph");
+const ectx=ex.getContext("2d");
+
+const exOX=350;
+const exOY=300;
+const exUnit=55;
+
+ectx.fillStyle="white";
+ectx.fillRect(0,0,700,600);
+
+/* Grid */
+
+ectx.strokeStyle="#d9eeee";
+ectx.lineWidth=1;
+
+for(let i=-6;i<=6;i++){
+
+    let x=exOX+i*exUnit;
+
+    ectx.beginPath();
+    ectx.moveTo(x,30);
+    ectx.lineTo(x,570);
+    ectx.stroke();
+}
+
+for(let i=-5;i<=5;i++){
+
+    let y=exOY-i*exUnit;
+
+    ectx.beginPath();
+    ectx.moveTo(40,y);
+    ectx.lineTo(660,y);
+    ectx.stroke();
+}
+
+/* Axes */
+
+ectx.strokeStyle="#000";
+ectx.lineWidth=3;
+
+ectx.beginPath();
+ectx.moveTo(35,exOY);
+ectx.lineTo(665,exOY);
+ectx.stroke();
+
+ectx.beginPath();
+ectx.moveTo(exOX,570);
+ectx.lineTo(exOX,30);
+ectx.stroke();
+
+/* Arrows */
+
+ectx.beginPath();
+ectx.moveTo(665,exOY);
+ectx.lineTo(648,exOY-9);
+ectx.lineTo(648,exOY+9);
+ectx.closePath();
+ectx.fill();
+
+ectx.beginPath();
+ectx.moveTo(35,exOY);
+ectx.lineTo(52,exOY-9);
+ectx.lineTo(52,exOY+9);
+ectx.closePath();
+ectx.fill();
+
+ectx.beginPath();
+ectx.moveTo(exOX,30);
+ectx.lineTo(exOX-9,47);
+ectx.lineTo(exOX+9,47);
+ectx.closePath();
+ectx.fill();
+
+ectx.beginPath();
+ectx.moveTo(exOX,570);
+ectx.lineTo(exOX-9,553);
+ectx.lineTo(exOX+9,553);
+ectx.closePath();
+ectx.fill();
+
+/* Numbers */
+
+ectx.font="16px Arial";
+ectx.fillStyle="#222";
+ectx.textAlign="center";
+
+for(let n=-5;n<=5;n++){
+
+    if(n!==0){
+
+        ectx.fillText(
+            n,
+            exOX+n*exUnit,
+            exOY+23
+        );
+
+        ectx.fillText(
+            n,
+            exOX-20,
+            exOY-n*exUnit+5
+        );
+    }
+}
+
+/* Axis names */
+
+ectx.font="bold 20px Arial";
+ectx.fillStyle="#1565C0";
+
+ectx.fillText("X",650,exOY-15);
+ectx.fillText("X′",55,exOY-15);
+ectx.fillText("Y",exOX+18,45);
+ectx.fillText("Y′",exOX+18,560);
+
+/* Origin */
+
+ectx.fillStyle="#000";
+
+ectx.beginPath();
+ectx.arc(exOX,exOY,5,0,Math.PI*2);
+ectx.fill();
+
+ectx.font="bold 16px Arial";
+ectx.fillText("O",exOX-18,exOY+20);
+
+
+/* Point function */
+
+function examplePoint(xVal,yVal,label,dx,dy){
+
+    const px=exOX+xVal*exUnit;
+    const py=exOY-yVal*exUnit;
+
+    ectx.setLineDash([7,5]);
+    ectx.strokeStyle="#777";
+    ectx.lineWidth=2;
+
+    ectx.beginPath();
+    ectx.moveTo(exOX,py);
+    ectx.lineTo(px,py);
+    ectx.stroke();
+
+    ectx.beginPath();
+    ectx.moveTo(px,exOY);
+    ectx.lineTo(px,py);
+    ectx.stroke();
+
+    ectx.setLineDash([]);
+
+    ectx.fillStyle="#000";
+
+    ectx.beginPath();
+    ectx.arc(px,py,7,0,Math.PI*2);
+    ectx.fill();
+
+    ectx.font="bold 17px Arial";
+    ectx.fillStyle="#222";
+    ectx.textAlign="left";
+
+    ectx.fillText(
+        label,
+        px+dx,
+        py+dy
+    );
+}
+
+examplePoint(4,3,"B (4,3)",10,-10);
+examplePoint(-3,4,"M (-3,4)",-95,-10);
+examplePoint(-5,-4,"L (-5,-4)",-115,28);
+examplePoint(3,-4,"S (3,-4)",10,28);
+
+</script>
+
+<!-- =========================================
+     ઉદાહરણ 2 : બિંદુઓના યામ
+========================================= -->
+
+<div class="box">
+
+    <h2>ઉદાહરણ 2</h2>
+
+    <p>
+        નીચેના બિંદુઓના યામ લખો અને તેમને યામ-સમતલમાં દર્શાવો :
+    </p>
+
+    <p style="
+        text-align:center;
+        font-size:22px;
+        font-weight:bold;
+        line-height:2;
+    ">
+        A(4,0), B(0,3), C(-5,0), D(0,-4), E(2/3,0)
+    </p>
+
+    <!-- ==============================
+         જવાબ
+    =============================== -->
+
+    <div class="example">
+
+        <h3>✅ જવાબ :</h3>
+
+        <p>
+            <b>A(4,0)</b> → A બિંદુ X-અક્ષ પર છે.
+        </p>
+
+        <p>
+            <b>B(0,3)</b> → B બિંદુ Y-અક્ષ પર છે.
+        </p>
+
+        <p>
+            <b>C(-5,0)</b> → C બિંદુ X-અક્ષ પર છે.
+        </p>
+
+        <p>
+            <b>D(0,-4)</b> → D બિંદુ Y-અક્ષ પર છે.
+        </p>
+
+        <p>
+            <b>E(2/3,0)</b> → E બિંદુ X-અક્ષ પર છે.
+        </p>
+
+    </div>
+
+
+    <!-- ==============================
+         GRAPH
+    =============================== -->
+
+    <div style="
+        width:100%;
+        max-width:700px;
+        margin:20px auto;
+        text-align:center;
+    ">
+
+        <canvas
+            id="example2Graph"
+            width="700"
+            height="650"
+            style="
+                width:100%;
+                height:auto;
+                background:white;
+                border:2px solid #1565C0;
+                border-radius:10px;
+            ">
+        </canvas>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   ઉદાહરણ 2 GRAPH
+========================================= */
+
+const ex2Canvas = document.getElementById("example2Graph");
+const ex2Ctx = ex2Canvas.getContext("2d");
+
+const ex2OX = 350;
+const ex2OY = 325;
+const ex2Unit = 50;
+
+
+/* =========================================
+   GRID
+========================================= */
+
+ex2Ctx.strokeStyle = "#dddddd";
+ex2Ctx.lineWidth = 1;
+
+for (let i = -6; i <= 6; i++) {
+
+    const x = ex2OX + i * ex2Unit;
+
+    ex2Ctx.beginPath();
+    ex2Ctx.moveTo(x, 25);
+    ex2Ctx.lineTo(x, 625);
+    ex2Ctx.stroke();
+}
+
+for (let i = -6; i <= 6; i++) {
+
+    const y = ex2OY - i * ex2Unit;
+
+    ex2Ctx.beginPath();
+    ex2Ctx.moveTo(50, y);
+    ex2Ctx.lineTo(650, y);
+    ex2Ctx.stroke();
+}
+
+
+/* =========================================
+   X-અક્ષ
+========================================= */
+
+ex2Ctx.strokeStyle = "#000";
+ex2Ctx.lineWidth = 4;
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(35, ex2OY);
+ex2Ctx.lineTo(665, ex2OY);
+ex2Ctx.stroke();
+
+
+/* X positive arrow */
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(665, ex2OY);
+ex2Ctx.lineTo(648, ex2OY - 9);
+ex2Ctx.lineTo(648, ex2OY + 9);
+ex2Ctx.closePath();
+ex2Ctx.fill();
+
+
+/* X negative arrow */
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(35, ex2OY);
+ex2Ctx.lineTo(52, ex2OY - 9);
+ex2Ctx.lineTo(52, ex2OY + 9);
+ex2Ctx.closePath();
+ex2Ctx.fill();
+
+
+/* =========================================
+   Y-અક્ષ
+========================================= */
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(ex2OX, 625);
+ex2Ctx.lineTo(ex2OX, 25);
+ex2Ctx.stroke();
+
+
+/* Y positive arrow */
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(ex2OX, 25);
+ex2Ctx.lineTo(ex2OX - 9, 42);
+ex2Ctx.lineTo(ex2OX + 9, 42);
+ex2Ctx.closePath();
+ex2Ctx.fill();
+
+
+/* Y negative arrow */
+
+ex2Ctx.beginPath();
+ex2Ctx.moveTo(ex2OX, 625);
+ex2Ctx.lineTo(ex2OX - 9, 608);
+ex2Ctx.lineTo(ex2OX + 9, 608);
+ex2Ctx.closePath();
+ex2Ctx.fill();
+
+
+/* =========================================
+   X-અક્ષના આંકડા
+========================================= */
+
+ex2Ctx.font = "16px Arial";
+ex2Ctx.fillStyle = "#222";
+ex2Ctx.textAlign = "center";
+
+for (let i = -6; i <= 6; i++) {
+
+    if (i !== 0) {
+
+        ex2Ctx.fillText(
+            i,
+            ex2OX + i * ex2Unit,
+            ex2OY + 24
+        );
+    }
+}
+
+
+/* =========================================
+   Y-અક્ષના આંકડા
+========================================= */
+
+for (let i = -6; i <= 6; i++) {
+
+    if (i !== 0) {
+
+        ex2Ctx.fillText(
+            i,
+            ex2OX - 20,
+            ex2OY - i * ex2Unit + 5
+        );
+    }
+}
+
+
+/* =========================================
+   અક્ષોના નામ
+========================================= */
+
+ex2Ctx.font = "bold 20px Arial";
+ex2Ctx.fillStyle = "#1565C0";
+
+ex2Ctx.textAlign = "center";
+
+ex2Ctx.fillText(
+    "X",
+    650,
+    ex2OY - 15
+);
+
+ex2Ctx.fillText(
+    "X′",
+    55,
+    ex2OY - 15
+);
+
+ex2Ctx.fillText(
+    "Y",
+    ex2OX + 20,
+    45
+);
+
+ex2Ctx.fillText(
+    "Y′",
+    ex2OX + 20,
+    610
+);
+
+
+/* =========================================
+   ઉગમબિંદુ O(0,0)
+========================================= */
+
+ex2Ctx.fillStyle = "#000";
+
+ex2Ctx.beginPath();
+
+ex2Ctx.arc(
+    ex2OX,
+    ex2OY,
+    5,
+    0,
+    Math.PI * 2
+);
+
+ex2Ctx.fill();
+
+ex2Ctx.font = "bold 16px Arial";
+ex2Ctx.textAlign = "left";
+
+ex2Ctx.fillText(
+    "O(0,0)",
+    ex2OX + 10,
+    ex2OY + 22
+);
+
+
+/* =========================================
+   POINT DRAW FUNCTION
+========================================= */
+
+function drawExample2Point(
+    xValue,
+    yValue,
+    label,
+    labelDX,
+    labelDY
+) {
+
+    const px = ex2OX + xValue * ex2Unit;
+    const py = ex2OY - yValue * ex2Unit;
+
+
+    /* Projection lines */
+
+    ex2Ctx.setLineDash([6, 5]);
+    ex2Ctx.strokeStyle = "#FF9800";
+    ex2Ctx.lineWidth = 2;
+
+    /* Vertical projection */
+
+    ex2Ctx.beginPath();
+
+    ex2Ctx.moveTo(px, py);
+    ex2Ctx.lineTo(px, ex2OY);
+
+    ex2Ctx.stroke();
+
+
+    /* Horizontal projection */
+
+    ex2Ctx.beginPath();
+
+    ex2Ctx.moveTo(px, py);
+    ex2Ctx.lineTo(ex2OX, py);
+
+    ex2Ctx.stroke();
+
+    ex2Ctx.setLineDash([]);
+
+
+    /* Point */
+
+    ex2Ctx.fillStyle = "#D32F2F";
+
+    ex2Ctx.beginPath();
+
+    ex2Ctx.arc(
+        px,
+        py,
+        8,
+        0,
+        Math.PI * 2
+    );
+
+    ex2Ctx.fill();
+
+
+    /* Label */
+
+    ex2Ctx.font = "bold 17px Arial";
+    ex2Ctx.fillStyle = "#222";
+    ex2Ctx.textAlign = "left";
+
+    ex2Ctx.fillText(
+        label,
+        px + labelDX,
+        py + labelDY
+    );
+}
+
+
+/* =========================================
+   A (4,0)
+========================================= */
+
+drawExample2Point(
+    4,
+    0,
+    "A (4,0)",
+    10,
+    -12
+);
+
+
+/* =========================================
+   B (0,3)
+========================================= */
+
+drawExample2Point(
+    0,
+    3,
+    "B (0,3)",
+    12,
+    -10
+);
+
+
+/* =========================================
+   C (-5,0)
+========================================= */
+
+drawExample2Point(
+    -5,
+    0,
+    "C (-5,0)",
+    -95,
+    -12
+);
+
+
+/* =========================================
+   D (0,-4)
+========================================= */
+
+drawExample2Point(
+    0,
+    -4,
+    "D (0,-4)",
+    12,
+    28
+);
+
+
+/* =========================================
+   E (2/3,0)
+========================================= */
+
+/*
+   2/3 = 0.666666...
+
+   એટલે E બિંદુ:
+   X = 2/3
+   Y = 0
+
+   તે X-અક્ષ પર, O અને A વચ્ચે
+   2/3 એકમ દૂર રહેશે.
+*/
+
+const ex2E_X = 2 / 3;
+const ex2E_Y = 0;
+
+const ex2EPX =
+    ex2OX + ex2E_X * ex2Unit;
+
+const ex2EPY =
+    ex2OY - ex2E_Y * ex2Unit;
+
+
+/* E point */
+
+ex2Ctx.fillStyle = "#FF9800";
+
+ex2Ctx.beginPath();
+
+ex2Ctx.arc(
+    ex2EPX,
+    ex2EPY,
+    9,
+    0,
+    Math.PI * 2
+);
+
+ex2Ctx.fill();
+
+
+/* E label */
+
+ex2Ctx.font = "bold 17px Arial";
+ex2Ctx.fillStyle = "#E65100";
+ex2Ctx.textAlign = "left";
+
+ex2Ctx.fillText(
+    "E (2/3,0)",
+    ex2EPX + 12,
+    ex2EPY + 30
+);
+
+
+/* =========================================
+   E માટે 2/3 દર્શાવતું નાનું નિશાન
+========================================= */
+
+ex2Ctx.strokeStyle = "#E65100";
+ex2Ctx.lineWidth = 2;
+
+ex2Ctx.beginPath();
+
+ex2Ctx.moveTo(
+    ex2OX,
+    ex2OY + 40
+);
+
+ex2Ctx.lineTo(
+    ex2EPX,
+    ex2OY + 40
+);
+
+ex2Ctx.stroke();
+
+
+/* Fraction explanation */
+
+ex2Ctx.font = "14px Arial";
+ex2Ctx.fillStyle = "#E65100";
+ex2Ctx.textAlign = "center";
+
+ex2Ctx.fillText(
+    "2/3 એકમ",
+    (ex2OX + ex2EPX) / 2,
+    ex2OY + 58
+);
+
+</script>
+
+  <!-- =========================================
+     સ્વાધ્યાય 3.2
+========================================= -->
+
+<div class="box">
+
+    <h2>સ્વાધ્યાય 3.2</h2>
+
+    <!-- =====================================
+         પ્રશ્ન 1
+    ====================================== -->
+
+    <h2>પ્રશ્ન 1</h2>
+
+    <p>
+        નીચેના દરેક પ્રશ્નના જવાબ આપો :
+    </p>
+
+    <p>
+        <b>(i)</b>
+        યામ-સમતલમાં કોઈપણ બિંદુ દર્શાવવા ઉપયોગમાં લેવાતી
+        સમક્ષિતિજ અને શિરોલંબ રેખાઓનાં નામ શું છે?
+    </p>
+
+    <p>
+        <b>જવાબ:</b>
+        સમક્ષિતિજ રેખાને <b>X-અક્ષ</b> અને શિરોલંબ
+        રેખાને <b>Y-અક્ષ</b> કહે છે.
+    </p>
+
+    <p>
+        <b>(ii)</b>
+        આ બે રેખાઓથી બનતા સમતલના દરેક ભાગનું નામ શું છે?
+    </p>
+
+    <p>
+        <b>જવાબ:</b>
+        આ ચાર ભાગોને <b>ચરણ</b> અથવા <b>પાદ</b> કહે છે.
+    </p>
+
+    <p>
+        <b>(iii)</b>
+        આ બે રેખાઓ જ્યાં છેદે તે બિંદુનું નામ લખો.
+    </p>
+
+    <p>
+        <b>જવાબ:</b>
+        આ બિંદુને <b>ઉગમબિંદુ O(0,0)</b> કહે છે.
+    </p>
+
+</div>
+
+
+<!-- =========================================
+     પ્રશ્ન 2
+========================================= -->
+
+<div class="box">
+
+    <h2>પ્રશ્ન 2</h2>
+
+    <p>
+        <b>આકૃતિ 3.14 જુઓ અને માગ્યા પ્રમાણે જવાબ લખો :</b>
+    </p>
+
+    <p>
+        <b>(i)</b> બિંદુ B ના યામ જણાવો.
+    </p>
+
+    <p>
+        <b>(ii)</b> બિંદુ C ના યામ જણાવો.
+    </p>
+
+    <p>
+        <b>(iii)</b> (-3, -5) દ્વારા દર્શાવાતું બિંદુ લખો.
+    </p>
+
+    <p>
+        <b>(iv)</b> (2, -4) દ્વારા દર્શાવાતું બિંદુ લખો.
+    </p>
+
+    <p>
+        <b>(v)</b> બિંદુ D નો X-યામ જણાવો.
+    </p>
+
+    <p>
+        <b>(vi)</b> બિંદુ H નો Y-યામ જણાવો.
+    </p>
+
+    <p>
+        <b>(vii)</b> બિંદુ L ના યામ જણાવો.
+    </p>
+
+    <p>
+        <b>(viii)</b> બિંદુ M ના યામ જણાવો.
+    </p>
+
+
+    <!-- =====================================
+         જવાબ
+    ====================================== -->
+
+    <div class="example">
+
+        <h3>✅ જવાબ :</h3>
+
+        <p>
+            <b>(i)</b>
+            બિંદુ B ના યામ = <b>(-5, 2)</b>
+        </p>
+
+        <p>
+            <b>(ii)</b>
+            બિંદુ C ના યામ = <b>(5, -5)</b>
+        </p>
+
+        <p>
+            <b>(iii)</b>
+            (-3, -5) દ્વારા દર્શાવાતું બિંદુ = <b>E</b>
+        </p>
+
+        <p>
+            <b>(iv)</b>
+            (2, -4) દ્વારા દર્શાવાતું બિંદુ = <b>G</b>
+        </p>
+
+        <p>
+            <b>(v)</b>
+            બિંદુ D નો X-યામ = <b>6</b>
+        </p>
+
+        <p>
+            <b>(vi)</b>
+            બિંદુ H નો Y-યામ = <b>-3</b>
+        </p>
+
+        <p>
+            <b>(vii)</b>
+            બિંદુ L ના યામ = <b>(0, 5)</b>
+        </p>
+
+        <p>
+            <b>(viii)</b>
+            બિંદુ M ના યામ = <b>(-3, 0)</b>
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         આકૃતિ 3.14
+    ====================================== -->
+
+    <h3 style="
+        text-align:center;
+        color:#1565C0;
+        margin-top:25px;
+    ">
+        📊 આકૃતિ 3.14
+    </h3>
+
+    <div style="
+        width:100%;
+        max-width:750px;
+        margin:20px auto;
+        text-align:center;
+    ">
+
+        <canvas
+            id="swadhyay32Graph"
+            width="750"
+            height="700"
+            style="
+                width:100%;
+                height:auto;
+                background:white;
+                border:2px solid #1565C0;
+                border-radius:10px;
+            ">
+        </canvas>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   સ્વાધ્યાય 3.2 - આકૃતિ 3.14
+========================================= */
+
+const s32Canvas =
+    document.getElementById("swadhyay32Graph");
+
+const s32Ctx =
+    s32Canvas.getContext("2d");
+
+
+/* =========================================
+   GRAPH SETTINGS
+========================================= */
+
+const s32OX = 375;
+const s32OY = 350;
+
+const s32Unit = 55;
+
+
+/* =========================================
+   GRID
+========================================= */
+
+s32Ctx.strokeStyle = "#eeeeee";
+s32Ctx.lineWidth = 1;
+
+for (let i = -6; i <= 6; i++) {
+
+    const x = s32OX + i * s32Unit;
+
+    s32Ctx.beginPath();
+    s32Ctx.moveTo(x, 30);
+    s32Ctx.lineTo(x, 670);
+    s32Ctx.stroke();
+}
+
+
+for (let i = -6; i <= 6; i++) {
+
+    const y = s32OY - i * s32Unit;
+
+    s32Ctx.beginPath();
+    s32Ctx.moveTo(45, y);
+    s32Ctx.lineTo(705, y);
+    s32Ctx.stroke();
+}
+
+
+/* =========================================
+   X-અક્ષ
+========================================= */
+
+s32Ctx.strokeStyle = "#00BFC4";
+s32Ctx.lineWidth = 3;
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(35, s32OY);
+s32Ctx.lineTo(715, s32OY);
+s32Ctx.stroke();
+
+
+/* X positive arrow */
+
+s32Ctx.beginPath();
+
+s32Ctx.moveTo(715, s32OY);
+s32Ctx.lineTo(698, s32OY - 9);
+s32Ctx.lineTo(698, s32OY + 9);
+
+s32Ctx.closePath();
+s32Ctx.fillStyle = "#00BFC4";
+s32Ctx.fill();
+
+
+/* X negative arrow */
+
+s32Ctx.beginPath();
+
+s32Ctx.moveTo(35, s32OY);
+s32Ctx.lineTo(52, s32OY - 9);
+s32Ctx.lineTo(52, s32OY + 9);
+
+s32Ctx.closePath();
+s32Ctx.fill();
+
+
+/* =========================================
+   Y-અક્ષ
+========================================= */
+
+s32Ctx.beginPath();
+
+s32Ctx.moveTo(s32OX, 675);
+s32Ctx.lineTo(s32OX, 25);
+
+s32Ctx.stroke();
+
+
+/* Y positive arrow */
+
+s32Ctx.beginPath();
+
+s32Ctx.moveTo(s32OX, 25);
+s32Ctx.lineTo(s32OX - 9, 42);
+s32Ctx.lineTo(s32OX + 9, 42);
+
+s32Ctx.closePath();
+s32Ctx.fill();
+
+
+/* Y negative arrow */
+
+s32Ctx.beginPath();
+
+s32Ctx.moveTo(s32OX, 675);
+s32Ctx.lineTo(s32OX - 9, 658);
+s32Ctx.lineTo(s32OX + 9, 658);
+
+s32Ctx.closePath();
+s32Ctx.fill();
+
+
+/* =========================================
+   AXIS NUMBERS
+========================================= */
+
+s32Ctx.font = "15px Arial";
+s32Ctx.fillStyle = "#00AEB3";
+s32Ctx.textAlign = "center";
+
+
+/* X numbers */
+
+for (let i = -6; i <= 6; i++) {
+
+    if (i !== 0) {
+
+        s32Ctx.fillText(
+            i,
+            s32OX + i * s32Unit,
+            s32OY + 20
+        );
+    }
+}
+
+
+/* Y numbers */
+
+for (let i = -6; i <= 6; i++) {
+
+    if (i !== 0) {
+
+        s32Ctx.fillText(
+            i,
+            s32OX - 18,
+            s32OY - i * s32Unit + 5
+        );
+    }
+}
+
+
+/* =========================================
+   AXIS NAMES
+========================================= */
+
+s32Ctx.font = "bold 20px Arial";
+s32Ctx.fillStyle = "#00AEB3";
+
+
+s32Ctx.fillText(
+    "X",
+    700,
+    s32OY - 12
+);
+
+
+s32Ctx.fillText(
+    "X′",
+    50,
+    s32OY - 12
+);
+
+
+s32Ctx.fillText(
+    "Y",
+    s32OX + 18,
+    35
+);
+
+
+s32Ctx.fillText(
+    "Y′",
+    s32OX + 20,
+    665
+);
+
+
+/* =========================================
+   ORIGIN
+========================================= */
+
+s32Ctx.fillStyle = "#00AEB3";
+
+s32Ctx.beginPath();
+
+s32Ctx.arc(
+    s32OX,
+    s32OY,
+    4,
+    0,
+    Math.PI * 2
+);
+
+s32Ctx.fill();
+
+
+s32Ctx.font = "15px Arial";
+s32Ctx.textAlign = "right";
+
+s32Ctx.fillText(
+    "O",
+    s32OX - 8,
+    s32OY + 20
+);
+
+
+/* =========================================
+   POINT FUNCTION
+========================================= */
+
+function drawS32Point(
+    xValue,
+    yValue,
+    label,
+    dx,
+    dy
+) {
+
+    const px =
+        s32OX + xValue * s32Unit;
+
+    const py =
+        s32OY - yValue * s32Unit;
+
+
+    /* Dashed projection */
+
+    s32Ctx.setLineDash([7, 5]);
+
+    s32Ctx.strokeStyle = "#55C9CC";
+    s32Ctx.lineWidth = 2;
+
+
+    /* Vertical */
+
+    s32Ctx.beginPath();
+
+    s32Ctx.moveTo(px, py);
+    s32Ctx.lineTo(px, s32OY);
+
+    s32Ctx.stroke();
+
+
+    /* Horizontal */
+
+    s32Ctx.beginPath();
+
+    s32Ctx.moveTo(px, py);
+    s32Ctx.lineTo(s32OX, py);
+
+    s32Ctx.stroke();
+
+
+    s32Ctx.setLineDash([]);
+
+
+    /* Point */
+
+    s32Ctx.fillStyle = "#00BFC4";
+
+    s32Ctx.beginPath();
+
+    s32Ctx.arc(
+        px,
+        py,
+        5,
+        0,
+        Math.PI * 2
+    );
+
+    s32Ctx.fill();
+
+
+    /* Label */
+
+    s32Ctx.font = "bold 17px Arial";
+    s32Ctx.fillStyle = "#00AEB3";
+    s32Ctx.textAlign = "left";
+
+    s32Ctx.fillText(
+        label,
+        px + dx,
+        py + dy
+    );
+}
+
+
+/* =========================================
+   B (-5,2)
+========================================= */
+
+drawS32Point(
+    -5,
+    2,
+    "B",
+    -25,
+    -5
+);
+
+
+/* =========================================
+   D (6,2)
+========================================= */
+
+drawS32Point(
+    6,
+    2,
+    "D",
+    10,
+    -5
+);
+
+
+/* =========================================
+   H (-5,-3)
+========================================= */
+
+drawS32Point(
+    -5,
+    -3,
+    "H",
+    -25,
+    20
+);
+
+
+/* =========================================
+   E (-3,-5)
+========================================= */
+
+drawS32Point(
+    -3,
+    -5,
+    "E",
+    -25,
+    25
+);
+
+
+/* =========================================
+   C (5,-5)
+========================================= */
+
+drawS32Point(
+    5,
+    -5,
+    "C",
+    10,
+    25
+);
+
+
+/* =========================================
+   G (2,-4)
+========================================= */
+
+drawS32Point(
+    2,
+    -4,
+    "G",
+    10,
+    25
+);
+
+
+/* =========================================
+   L (0,5)
+========================================= */
+
+drawS32Point(
+    0,
+    5,
+    "L",
+    12,
+    -8
+);
+
+
+/* =========================================
+   M (-3,0)
+========================================= */
+
+drawS32Point(
+    -3,
+    0,
+    "M",
+    -10,
+    -12
+);
+
+
+/* =========================================
+   RECTANGLE / GUIDE LINES
+   આકૃતિ 3.14 જેવી dashed રચના
+========================================= */
+
+s32Ctx.setLineDash([7,5]);
+s32Ctx.strokeStyle = "#55C9CC";
+s32Ctx.lineWidth = 2;
+
+
+/* B-D horizontal */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX - 5*s32Unit,
+    s32OY - 2*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX + 6*s32Unit,
+    s32OY - 2*s32Unit
+);
+s32Ctx.stroke();
+
+
+/* B-H vertical */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX - 5*s32Unit,
+    s32OY - 2*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX - 5*s32Unit,
+    s32OY + 3*s32Unit
+);
+s32Ctx.stroke();
+
+
+/* H-Y axis */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX - 5*s32Unit,
+    s32OY + 3*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX,
+    s32OY + 3*s32Unit
+);
+s32Ctx.stroke();
+
+
+/* D down to C */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX + 6*s32Unit,
+    s32OY - 2*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX + 6*s32Unit,
+    s32OY + 5*s32Unit
+);
+s32Ctx.stroke();
+
+
+/* C to E */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX - 3*s32Unit,
+    s32OY + 5*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX + 5*s32Unit,
+    s32OY + 5*s32Unit
+);
+s32Ctx.stroke();
+
+
+/* E up to M */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX - 3*s32Unit,
+    s32OY + 5*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX - 3*s32Unit,
+    s32OY
+);
+s32Ctx.stroke();
+
+
+/* G */
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX + 2*s32Unit,
+    s32OY
+);
+s32Ctx.lineTo(
+    s32OX + 2*s32Unit,
+    s32OY + 4*s32Unit
+);
+s32Ctx.stroke();
+
+
+s32Ctx.beginPath();
+s32Ctx.moveTo(
+    s32OX,
+    s32OY + 4*s32Unit
+);
+s32Ctx.lineTo(
+    s32OX + 2*s32Unit,
+    s32OY + 4*s32Unit
+);
+s32Ctx.stroke();
+
+
+s32Ctx.setLineDash([]);
+
+</script>
+
+<!-- ==================================================
+અંતિમ યાદ
+================================================== -->
+
+<div class="important">
+
+<h3>⭐ પરીક્ષા માટે યાદ રાખો</h3>
+
+<p>
+1. બિંદુના યામનું સ્વરૂપ <b>(X,Y)</b> છે.
+</p>
+
+<p>
+2. પહેલો યામ = <b>ભૂજ / X-યામ</b>.
+</p>
+
+<p>
+3. બીજો યામ = <b>કોટિ / Y-યામ</b>.
+</p>
+
+<p>
+4. X-અક્ષ પર બિંદુ → <b>(x,0)</b>.
+</p>
+
+<p>
+5. Y-અક્ષ પર બિંદુ → <b>(0,y)</b>.
+</p>
+
+<p>
+6. ઉગમબિંદુ → <b>(0,0)</b>.
+</p>
+
+</div>
+
+
+<footer>
+
+© Grow with Study | ધોરણ 9 ગણિત | પ્રકરણ 3 યામ ભૂમિતિ
+
+</footer>
+
+</body>
+</html>
